@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Xml.Linq;
 
@@ -8,12 +9,13 @@ namespace SerialComm
         SerialPort serialPort = new SerialPort();
         string receivedText = "";
         string terminator = "";
+        long nanosecPerTick = (1000L * 1000L * 1000L) / Stopwatch.Frequency;
         public SerialComm()
         {
             InitializeComponent();
             serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
             numericUpDown1.Enabled = false;
-            numericUpDown2.Enabled = false;
+            numericUpDown2.Enabled = false;         
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -107,6 +109,24 @@ namespace SerialComm
         {
             numericUpDown1.Enabled = radioButton1.Checked || radioButton2.Checked;
             numericUpDown2.Enabled = radioButton2.Checked;
+        }
+
+        private void pingButton_Click(object sender, EventArgs e)
+        {
+            if (serialPort.IsOpen)
+            {
+                Stopwatch sw = new Stopwatch();
+                serialPort.Write("ping");
+                sw.Start();
+                while (true)
+                {
+                    if(serialPort.CtsHolding)
+                        break;
+                }
+                sw.Stop();
+                receivedText = (sw.ElapsedTicks * nanosecPerTick).ToString() + " ns";
+                this.Invoke(new EventHandler(updateOutputText));
+            }
         }
     }
 }

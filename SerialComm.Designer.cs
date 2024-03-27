@@ -43,7 +43,6 @@
             outputText = new TextBox();
             label7 = new Label();
             sendButton = new Button();
-            transactionButton = new Button();
             pingButton = new Button();
             parityControlBox = new ComboBox();
             stopBitsBox = new ComboBox();
@@ -161,6 +160,7 @@
             inputText.Location = new Point(12, 143);
             inputText.Multiline = true;
             inputText.Name = "inputText";
+            inputText.ScrollBars = ScrollBars.Vertical;
             inputText.Size = new Size(745, 144);
             inputText.TabIndex = 10;
             // 
@@ -175,12 +175,13 @@
             // 
             // outputText
             // 
-            outputText.BackColor = SystemColors.Desktop;
+            outputText.BackColor = Color.Black;
             outputText.Enabled = false;
-            outputText.ForeColor = SystemColors.ControlLightLight;
+            outputText.ForeColor = Color.White;
             outputText.Location = new Point(12, 347);
             outputText.Multiline = true;
             outputText.Name = "outputText";
+            outputText.ScrollBars = ScrollBars.Vertical;
             outputText.Size = new Size(745, 144);
             outputText.TabIndex = 12;
             // 
@@ -203,23 +204,15 @@
             sendButton.UseVisualStyleBackColor = true;
             sendButton.Click += sendButton_Click;
             // 
-            // transactionButton
-            // 
-            transactionButton.Location = new Point(93, 293);
-            transactionButton.Name = "transactionButton";
-            transactionButton.Size = new Size(75, 23);
-            transactionButton.TabIndex = 16;
-            transactionButton.Text = "Transakcja";
-            transactionButton.UseVisualStyleBackColor = true;
-            // 
             // pingButton
             // 
-            pingButton.Location = new Point(174, 293);
+            pingButton.Location = new Point(93, 293);
             pingButton.Name = "pingButton";
             pingButton.Size = new Size(75, 23);
             pingButton.TabIndex = 17;
             pingButton.Text = "PING";
             pingButton.UseVisualStyleBackColor = true;
+            pingButton.Click += pingButton_Click;
             // 
             // parityControlBox
             // 
@@ -365,7 +358,6 @@
             Controls.Add(stopBitsBox);
             Controls.Add(parityControlBox);
             Controls.Add(pingButton);
-            Controls.Add(transactionButton);
             Controls.Add(sendButton);
             Controls.Add(label7);
             Controls.Add(outputText);
@@ -381,6 +373,7 @@
             Controls.Add(label2);
             Controls.Add(portBox);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "SerialComm";
             Text = "SerialComm";
             Load += Form1_Load;
@@ -409,7 +402,6 @@
         private TextBox outputText;
         private Label label7;
         private Button sendButton;
-        private Button transactionButton;
         private Button pingButton;
         private ComboBox parityControlBox;
         private ComboBox stopBitsBox;
