@@ -57,6 +57,8 @@
             numericUpDown1 = new NumericUpDown();
             radioButton2 = new RadioButton();
             radioButton1 = new RadioButton();
+            transactButton = new Button();
+            transactInfoLabel = new Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -176,7 +178,8 @@
             // outputText
             // 
             outputText.BackColor = Color.Black;
-            outputText.Enabled = false;
+            outputText.Enabled = true;
+            outputText.ReadOnly = true;
             outputText.ForeColor = Color.White;
             outputText.Location = new Point(12, 347);
             outputText.Multiline = true;
@@ -343,11 +346,33 @@
             radioButton1.UseVisualStyleBackColor = true;
             radioButton1.CheckedChanged += radioButton_CheckedChanged;
             // 
+            // transactButton
+            // 
+            transactButton.Location = new Point(174, 293);
+            transactButton.Name = "transactButton";
+            transactButton.Size = new Size(75, 23);
+            transactButton.TabIndex = 27;
+            transactButton.Text = "Transakcje";
+            transactButton.UseVisualStyleBackColor = true;
+            transactButton.Click += transactButton_Click;
+            // 
+            // transactInfoLabel
+            // 
+            transactInfoLabel.AutoSize = true;
+            transactInfoLabel.ForeColor = Color.Red;
+            transactInfoLabel.Location = new Point(255, 297);
+            transactInfoLabel.Name = "transactInfoLabel";
+            transactInfoLabel.Size = new Size(64, 15);
+            transactInfoLabel.TabIndex = 28;
+            transactInfoLabel.Text = "Wyłączone";
+            // 
             // SerialComm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(772, 532);
+            Controls.Add(transactInfoLabel);
+            Controls.Add(transactButton);
             Controls.Add(groupBox1);
             Controls.Add(clearButton);
             Controls.Add(connectionInfoLabel);
@@ -416,5 +441,7 @@
         private NumericUpDown numericUpDown2;
         private NumericUpDown numericUpDown1;
         private RadioButton radioButton2;
+        private Button transactButton;
+        private Label transactInfoLabel;
     }
 }
