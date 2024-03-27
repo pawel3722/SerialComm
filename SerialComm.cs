@@ -115,16 +115,20 @@ namespace SerialComm
         {
             if (serialPort.IsOpen)
             {
+                bool wasPinged = false;
                 Stopwatch sw = new Stopwatch();
                 serialPort.Write("ping");
                 sw.Start();
-                while (true)
+                while (sw.ElapsedMilliseconds < 5000)
                 {
                     if(serialPort.CtsHolding)
+                    {
+                        wasPinged = true;
                         break;
+                    }
                 }
                 sw.Stop();
-                receivedText = (sw.ElapsedTicks * nanosecPerTick).ToString() + " ns";
+                receivedText = wasPinged ? (sw.ElapsedTicks * nanosecPerTick).ToString() + " ns" : "Time exceeded.";
                 this.Invoke(new EventHandler(updateOutputText));
             }
         }
